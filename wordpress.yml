@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  database:
+    image: library/mariadb:latest
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: test123
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+    volumes:
+      - database:/var/lib/mysql
+
+  wordpress:
+    image: library/wordpress:5.6-php7.4-apache
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: test123
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_AUTO_UPDATE_CORE', 'minor');
+        define('WP_POST_REVISIONS', 5);
+        define('EMPTY_TRASH_DAYS', 7);
+        define('DISALLOW_FILE_EDIT', true);
+        define('DISALLOW_FILE_MODS', false);
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_DISPLAY', true);
+        define('WP_DEFAULT_THEME', 'code-challenge');
+    ports:
+      - 8081:80
+    volumes:
+      - wordpress:/var/www/html
+      - ./themes/code-challenge/:/var/www/html/wp-content/themes/code-challenge/
+
+volumes:
+  database:
+  wordpress:
+
+networks:
+  default:
