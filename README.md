@@ -36,10 +36,9 @@ docker-compose -f wordpress.yml down --volumes
 ### Create a list page using a public API to display configurable data
 
 - Add a page template that allows adding shortcodes using Gutenberg. The template should follow the HTML5/CSS3 standards and be created in such a way that future templates can be added without repeating sections like the header or footer. Do not worry about the design and focus more on adhering to modern practices for the markup.
-- Create a shortcode that displays a list of data from any public REST API, like [Earthquakes](https://earthquake.usgs.gov/fdsnws/event/1/) or even [Generated Fake Data](https://fakerapi.it/en). More resources below for finding an easy-to-use API.
+- Create a shortcode that displays a list of data from any public REST API, like [Earthquakes](https://earthquake.usgs.gov/fdsnws/event/1/). More resources below for finding easy-to-use APIs.
 - Extend the created shortcode to allow limiting the dataset. For instance, limiting to magnitude 5 earthquakes:
 [\[earthquakes minmagnitude 5\]](https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=5)
-- Add a settings page that an admin can use to configure some aspect of the shortcode, like limiting the number of results or adding an API key if its required.
 
 # Resources
 
